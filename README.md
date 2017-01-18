@@ -1,6 +1,6 @@
 # Data::TextOrBinary
 
-Implements a hueristic algorithm, very much like the one used by Git, to
+Implements a heuristic algorithm, very much like the one used by Git, to
 decide if some data is most likely to be text or binary.
 
 ## Synopsis
