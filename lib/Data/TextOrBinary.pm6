@@ -9,7 +9,7 @@ multi is-text(Blob $content, Int(Cool) :$test-bytes = 4096) is export {
     my int $printable;
     my int $unprintable;
     loop (my int $i = 0; $i < $limit; $i++) {
-        my int $check = $content[$i];
+        my uint $check = $content[$i];
         if $check == 0 {
             # NULL byte, so binary.
             return False;
