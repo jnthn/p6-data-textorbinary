@@ -8,29 +8,26 @@ multi is-text(Blob $content, Int(Cool) :$test-bytes = 4096) is export {
     my int $limit = $content.elems min $test-bytes;
     my int $printable;
     my int $unprintable;
-    loop (my int $i = 0; $i < $limit; $i++) {
+    for ^$limit -> int $i is copy {
         my uint $check = $content[$i];
-        if $check == 0 {
-            # NULL byte, so binary.
-            return False;
-        }
-        elsif $check == 13 {
-            # \r not followed by \n hints binary
-            if $content[$i + 1] != 10 {
-                return False;
+        if $check {
+            if $check == 13 {
+                # \r not followed by \n hints binary
+                return False if $content[++$i] != 10;
+            }
+            elsif $check == 10 {
+                # Ignore lone \n
+            }
+            elsif PRINTABLE_TABLE[$check] {
+                $printable++;
             }
             else {
-                $i++;
+                $unprintable++;
             }
         }
-        elsif $check == 10 {
-            # Ignore lone \n
-        }
-        elsif PRINTABLE_TABLE[$check] {
-            $printable++;
-        }
         else {
-            $unprintable++;
+            # NULL byte, so binary.
+            return False;
         }
     }
     return ($printable +> 7) >= $unprintable;
