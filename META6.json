@@ -1,13 +1,13 @@
 {
     "perl"          : "6.*",
     "name"          : "Data::TextOrBinary",
-    "version"       : "1.0",
+    "version"       : "1.2",
     "description"   : "Heuristic detection of text vs. binary data.",
     "author"        : "Jonathan Worthington <jnthn@jnthn.net>",
     "license"       : "Artistic-2.0",
     "depends"       : [],
     "provides"      : {
-		"Data::TextOrBinary" : "lib/Data/TextOrBinary.pm6"
+		"Data::TextOrBinary" : "lib/Data/TextOrBinary.rakumod"
     },
     "source-url"    : "https://github.com/jnthn/p6-data-textorbinary.git"
 }
