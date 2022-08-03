@@ -8,7 +8,8 @@ multi is-text(Blob $content, Int(Cool) :$test-bytes = 4096) is export {
     my int $limit = $content.elems min $test-bytes;
     my int $printable;
     my int $unprintable;
-    for ^$limit -> int $i is copy {
+    my int $i = -1;
+    while ++$i < $limit {
         my uint $check = $content[$i];
         if $check {
             if $check == 13 {
